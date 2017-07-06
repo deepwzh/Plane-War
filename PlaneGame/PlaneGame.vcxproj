@@ -186,7 +186,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="BombRight.h" />
+    <ClInclude Include="CommonFun.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GamePath.h" />
+    <ClInclude Include="GamePathArc.h" />
+    <ClInclude Include="GamePathLine.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="PlaneGame.h" />
     <ClInclude Include="PlaneGameDoc.h" />
     <ClInclude Include="PlaneGameView.h" />
@@ -195,7 +204,16 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="BombRight.cpp" />
+    <ClCompile Include="CommonFun.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GamePath.cpp" />
+    <ClCompile Include="GamePathArc.cpp" />
+    <ClCompile Include="GamePathLine.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PlaneGame.cpp" />
     <ClCompile Include="PlaneGameDoc.cpp" />
     <ClCompile Include="PlaneGameView.cpp" />
@@ -215,6 +233,14 @@
   <ItemGroup>
     <Image Include="res\PlaneGame.ico" />
     <Image Include="res\PlaneGameDoc.ico" />
+    <Image Include="res\plane\ball.BMP" />
+    <Image Include="res\plane\bitmap2.bmp" />
+    <Image Include="res\plane\bomb.bmp" />
+    <Image Include="res\plane\enemy.bmp" />
+    <Image Include="res\plane\explosion.BMP" />
+    <Image Include="res\plane\lands.bmp" />
+    <Image Include="res\plane\me.bmp" />
+    <Image Include="res\plane\stars.bmp" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

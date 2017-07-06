@@ -4,8 +4,10 @@
 
 
 #pragma once
-
-
+#include "Plane.h"
+#include "GameManager.h"
+#include "CommonFun.h"
+#include "Bomb.h"
 class CPlaneGameDoc : public CDocument
 {
 protected: // 仅从序列化创建
