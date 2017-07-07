@@ -3,6 +3,7 @@
 #include "BombRight.h"
 #include "GamePathArc.h"
 #include "GamePathLine.h"
+#include "GamePathDefault.h"
 class  CPlane :
 	public CGameObject
 {
@@ -12,16 +13,17 @@ public:
 	virtual BOOL move(CCommonFun::Direction direct);
 
 	// 通过 CGameObject 继承
-	virtual BOOL Collided() const override;
+	BOOL Collided(POSITION pos)  override;
 	// 通过 CGameObject 继承
 	virtual BOOL draw(CDC* pDC) override;
 protected:
 	static CImageList m_Images;
 	int speed;
 	bool is_fired;
-	int flood;
+	int blood;
 	int team;
 	int id;
+	int cnt;
 
 
 public:
@@ -39,5 +41,8 @@ public:
 
 	// 通过 CGameObject 继承
 	virtual BOOL Initial() override;
+	virtual int getHP() const;
+	virtual bool setHP(int hp);
+
 };
 

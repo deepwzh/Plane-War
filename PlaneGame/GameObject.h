@@ -17,7 +17,7 @@ public:
 		return CRect(point, CPoint(point.x + width, point.y + height));
 	}
 	// 碰撞操作
-	virtual BOOL Collided()const = 0;
+	virtual BOOL Collided(POSITION pos) = 0;
 	// 绘制对象
 	virtual BOOL draw(CDC* pDC) = 0;
 	// 初始化对象

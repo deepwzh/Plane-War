@@ -189,10 +189,13 @@
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BombRight.h" />
     <ClInclude Include="CommonFun.h" />
+    <ClInclude Include="EnemyPlane.h" />
+    <ClInclude Include="GameEnemyPath.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GamePath.h" />
     <ClInclude Include="GamePathArc.h" />
+    <ClInclude Include="GamePathDefault.h" />
     <ClInclude Include="GamePathLine.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Plane.h" />
@@ -207,10 +210,13 @@
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="BombRight.cpp" />
     <ClCompile Include="CommonFun.cpp" />
+    <ClCompile Include="EnemyPlane.cpp" />
+    <ClCompile Include="GameEnemyPath.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GamePath.cpp" />
     <ClCompile Include="GamePathArc.cpp" />
+    <ClCompile Include="GamePathDefault.cpp" />
     <ClCompile Include="GamePathLine.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Plane.cpp" />

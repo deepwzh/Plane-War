@@ -5,6 +5,7 @@ class CBomb :
 	public CGameObject
 {
 protected:
+	int cnt;
 	CPoint point0;
 	static CImageList m_Images;
 	int speed;
@@ -13,8 +14,8 @@ public:
 	CBomb(CGameManager* manager, int x = 0, int y = 0, int speed = 6, double offset = 0);
 	virtual ~CBomb();
 	BOOL setPoint(CPoint point);
+	BOOL Collided(POSITION pos) ;
 	// Í¨¹ý CGameObject ¼Ì³Ð
-	virtual BOOL Collided() const override;
 	virtual BOOL draw(CDC * pDC) override;
 	void setPath(CGamePath* path) {
 		if (this->path != NULL)

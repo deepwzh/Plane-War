@@ -9,7 +9,7 @@ BOOL CCommonFun::LoadImage(CImageList& imgList, UINT bmpID, COLORREF crMask, int
 		return FALSE;
 	BITMAP bmpinfo;
 	bmp.GetBitmap(&bmpinfo);
-	int width = bmpinfo.bmWidth;
+	int width = bmpinfo.bmWidth / nInitial;
 	int height = bmpinfo.bmHeight;
 	if (!imgList.Create(width, height, ILC_COLOR32 | ILC_MASK, nInitial, 0))
 		return FALSE;

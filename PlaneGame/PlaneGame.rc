@@ -86,11 +86,11 @@ IDB_BITMAP2             BITMAP                  "res\\plane\\bitmap2.bmp"
 
 IDB_Bomb                BITMAP                  "res\\plane\\bomb.bmp"
 
-IDB_BITMAP4             BITMAP                  "res\\plane\\enemy.bmp"
+IDB_Enemy               BITMAP                  "res\\plane\\enemy.bmp"
 
 IDB_BITMAP5             BITMAP                  "res\\plane\\explosion.BMP"
 
-IDB_MyPlane                 BITMAP                  "res\\plane\\me.bmp"
+IDB_MyPlane             BITMAP                  "res\\plane\\me.bmp"
 
 IDB_BG2                 BITMAP                  "res\\plane\\lands.bmp"
 

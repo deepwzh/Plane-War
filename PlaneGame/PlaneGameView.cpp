@@ -127,8 +127,9 @@ BOOL CPlaneGameView::InitGame()
 	m_pMemDC->SelectObject(m_pMemBitmap);
 
 	//产生主角(战机)
+	game_manager->StartGame(true);
 	SetTimer(1, 20, NULL);
-
+	
 	return TRUE;
 }
 
@@ -139,9 +140,13 @@ void CPlaneGameView::OnTimer(UINT_PTR nIDEvent)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-	
+	if (game_manager->getState() ==  CGameManager::End) {
+		KillTimer(1);
+		return;
+	}
 	game_manager->HandleKeyMap();
 	game_manager->draw(m_pMemDC);
+	game_manager->AI();
 	m_pDC->BitBlt(0, 0, game_manager->getWidth(), game_manager->getHeight(), m_pMemDC, 0, 0, SRCCOPY);
 	CView::OnTimer(nIDEvent);
 }

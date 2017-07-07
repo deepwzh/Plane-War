@@ -12,6 +12,8 @@
 #define IDB_BITMAP3                     312
 #define IDB_Bomb                        312
 #define IDB_BITMAP4                     313
+#define IDB_En                          313
+#define IDB_Enemy                       313
 #define IDB_BITMAP5                     314
 #define IDB_BITMAP6                     315
 #define IDB_BITMAP7                     316
