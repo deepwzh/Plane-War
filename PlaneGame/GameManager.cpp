@@ -2,13 +2,17 @@
 #include "GameManager.h" 
 CGameManager::CGameManager(int width , int height) : width(width), height(height)
 {
+	CLevel v;
 	cnt = 0;
 	shoot_mode = 1;
-	m_ObjList = new CObList[4];
-	CPlane::LoadImages();
-	CBomb::LoadImages();
+	board = new CGameBoardDefault(CPoint(0,0),width,height);
+	model = new CDataModel(board);
+	m_ObjList = new CObList[5];
+	CMyPlane::LoadImages();
+	CMyBomb::LoadImages();
+	CEnemyBomb::LoadImages();
 	CEnemyPlane::LoadImages();
-	myPlane = new CPlane(this,width/2,height/2,6);
+	myPlane = new CMyPlane(this,width/2,height/2,6);
 	//启动游戏
 	myPlane->Initial();
 }
@@ -24,7 +28,13 @@ void CGameManager::draw(CDC * m_pMemDC) {
 	CBrush*   pOldBrush = m_pMemDC->SelectObject(&brush);
 	m_pMemDC->Rectangle(0, 0, width, height);  // 这些参数可以调整图片添加位置和大小
 	m_pMemDC->SelectObject(pOldBrush);
+	
+	//绘制比赛的榜单
+	model->push();
+	board->draw(m_pMemDC);
 
+	scroll_speed+=1;
+	scroll_speed;
 	if (myPlane)
 		myPlane->draw(m_pMemDC);
 	else {
@@ -35,29 +45,68 @@ void CGameManager::draw(CDC * m_pMemDC) {
 	//绘制子弹/炸弹
 	POSITION mPos = NULL, _mPos = NULL;
 	CObList* list = getList();
+
 	for (mPos = list[enBomb].GetHeadPosition(); (_mPos = mPos) != NULL; ) {
-		CBomb * pBomb = (CBomb*)list[enBomb].GetNext(mPos);
+		if (!myPlane) {
+			return;
+		}
+		CEnemyBomb * pBomb = (CEnemyBomb*)list[enBomb].GetNext(mPos);
+		CRect tmpRect;
 		ASSERT(pBomb);
-		//CRect brect = pBomb->getRect();
+		if (tmpRect.IntersectRect(&pBomb->getRect(), myPlane->getRect())) {
+			if (pBomb->Collided(_mPos)) {
+				delete pBomb;
+				pBomb = NULL;
+			}
+			if (myPlane->Collided(NULL) && !is_god) {
+				delete myPlane;
+				myPlane = NULL;
+			}
+		}
+		if (!pBomb) continue;
+
 		if (is_InRange(pBomb)) {
-			this->removeObject(L"Bomb", _mPos);
+			this->removeObject(L"enBomb", _mPos);
 			delete pBomb;
+			pBomb = NULL;
 		}
 		else
 			pBomb->draw(m_pMemDC);
 	}
 
+	for (mPos = list[mineBomb].GetHeadPosition(); (_mPos = mPos) != NULL; ) {
+		if (!myPlane) {
+			return;
+		}
+		CMyBomb * pBomb = (CMyBomb*)list[mineBomb].GetNext(mPos);
+		CRect tmpRect;
+		ASSERT(pBomb);
+		CRect brect = pBomb->getRect();
+		if (!pBomb) continue;
 
+		if (is_InRange(pBomb)) {
+			this->removeObject(L"mineBomb", _mPos);
+			delete pBomb;
+			pBomb = NULL;
+		}
+		else
+			pBomb->draw(m_pMemDC);
+	}
+
+	mPos = NULL;
+	_mPos = NULL;
 	//绘制敌机，并处理碰撞
 	for (mPos = list[enPlane].GetHeadPosition(); (_mPos = mPos) != NULL; ) {
 		CEnemyPlane * pPlane = (CEnemyPlane*)list[enPlane].GetNext(mPos);
+
+		pPlane->attack(1);
 		ASSERT(pPlane);
 		CRect prect = pPlane->getRect();
 		int is_exist = 1;
 		POSITION mPos1 = NULL, _mPos1 = NULL;
-		for (mPos1 = list[enBomb].GetHeadPosition(); (_mPos1 = mPos1) != NULL; ) {
+		for (mPos1 = list[mineBomb].GetHeadPosition(); (_mPos1 = mPos1) != NULL; ) {
 			CRect tmpRect;
-			CBomb * pBomb = (CBomb*)list[enBomb].GetNext(mPos1);
+			CMyBomb * pBomb = (CMyBomb*)list[mineBomb].GetNext(mPos1);
 			ASSERT(pBomb);
 			CRect brect = pBomb->getRect();
 			if (tmpRect.IntersectRect(&brect, prect)) {
@@ -68,28 +117,30 @@ void CGameManager::draw(CDC * m_pMemDC) {
 				if (pPlane->Collided(_mPos)) {
 					delete pPlane;
 					pPlane = NULL;
+					break;
 				}
 				is_exist = 0;
 			}
+
 		}
 		CRect tmpRect;
 		if (!is_exist)
 			continue;
-		if (!myPlane)continue;
+		if (!myPlane || !pPlane)continue;
 		if (is_InRange(pPlane)) {
-			this->removeObject(L"Plane", _mPos);
+			this->removeObject(L"enPlane", _mPos);
 			delete pPlane;
 			pPlane = NULL;
 		}
 		else
 			pPlane->draw(m_pMemDC);
-
 		if (pPlane && myPlane && tmpRect.IntersectRect(pPlane->getRect(), myPlane->getRect())) {
-			if ( myPlane->Collided(NULL)&&!is_god) {
+			if (myPlane->Collided(NULL)&&!is_god) {
 				delete myPlane;
 				myPlane = NULL;
 			}
 			if (pPlane->Collided(_mPos)) {
+
 				delete pPlane;
 				pPlane = NULL;
 			}
@@ -98,11 +149,12 @@ void CGameManager::draw(CDC * m_pMemDC) {
 }
 void CGameManager::AI() {
 	cnt++;
-	int t = rand() % 5 + 1;
+	int t = rand() % 20 + 1;
 	if (cnt%t == 0) {
 		CEnemyPlane* ep1 = new CEnemyPlane(this, rand() % this->width, 0);
 		ep1->Initial();
-		this->registerObject(L"Plane",ep1);
+		this->registerObject(L"enPlane",ep1);
+		ep1->attack(1);
 		cnt = 0;
 	}
 }
@@ -135,7 +187,7 @@ void CGameManager::HandleKeyMap()
 		switchPlane();
 	}
 	if (GetKeyState(VK_SPACE) < 0) {
-		myPlane->attack(1);
+		myPlane->attack(10);
 	}
 }
 // 判断是否在屏幕区域内

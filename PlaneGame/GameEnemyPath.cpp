@@ -10,8 +10,8 @@ void CGameEnemyPath::getPosition(int & x, int& y, const int& x0, const int& y0, 
 {
 	x = 0;
 	//x = 25 * r* offset / 1;
-	y = r;
-	r -= s;
+	y = -s;
+	//r -= s;
 }
 
 CGameEnemyPath::~CGameEnemyPath()

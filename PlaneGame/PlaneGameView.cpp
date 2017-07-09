@@ -95,12 +95,15 @@ void CPlaneGameView::OnInitialUpdate()
 	InitGame();
 	// TODO: 在此添加专用代码和/或调用基类
 }
+
+
 void CPlaneGameView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
 
 	CView::OnKeyDown(nChar, nRepCnt, nFlags);
 }
+
 BOOL CPlaneGameView::InitGame()
 {
 	CView::OnInitialUpdate();
@@ -184,10 +187,8 @@ void CPlaneGameView::OnSize(UINT nType, int cx, int cy)
 		game_manager->setRect(rect.right - rect.left, rect.bottom - rect.top);
 	}
 
-
 	// TODO: 在此处添加消息处理程序代码
 }
-
 void CPlaneGameView::OnMove(UINT fwSide, LPRECT pRect)
 {
 	CView::OnMoving(fwSide, pRect);

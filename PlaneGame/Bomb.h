@@ -14,9 +14,9 @@ public:
 	CBomb(CGameManager* manager, int x = 0, int y = 0, int speed = 6, double offset = 0);
 	virtual ~CBomb();
 	BOOL setPoint(CPoint point);
-	BOOL Collided(POSITION pos) ;
+	BOOL Collided(POSITION pos) = 0 ;
 	// 通过 CGameObject 继承
-	virtual BOOL draw(CDC * pDC) override;
+	virtual BOOL draw(CDC * pDC) = 0;
 	void setPath(CGamePath* path) {
 		if (this->path != NULL)
 			delete path;
@@ -24,11 +24,9 @@ public:
 
 	}
 	virtual void getPath(int& x, int& y, const int& s);
-	// 通过 CGameObject 继承
-	 static BOOL LoadImages();
 
 	 // 通过 CGameObject 继承
-	 virtual BOOL Initial() override;
+	 virtual BOOL Initial() override = 0;
 protected:
 	double offset;
 public:

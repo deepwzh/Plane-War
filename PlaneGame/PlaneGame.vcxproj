@@ -186,10 +186,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BloodBar.h" />
     <ClInclude Include="Bomb.h" />
-    <ClInclude Include="BombRight.h" />
     <ClInclude Include="CommonFun.h" />
+    <ClInclude Include="DataModel.h" />
+    <ClInclude Include="EnemyBomb.h" />
     <ClInclude Include="EnemyPlane.h" />
+    <ClInclude Include="GameBoard.h" />
+    <ClInclude Include="GameBoardDefault.h" />
     <ClInclude Include="GameEnemyPath.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
@@ -197,20 +201,29 @@
     <ClInclude Include="GamePathArc.h" />
     <ClInclude Include="GamePathDefault.h" />
     <ClInclude Include="GamePathLine.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MyBloodBar.h" />
+    <ClInclude Include="MyBomb.h" />
+    <ClInclude Include="MyPlane.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="PlaneGame.h" />
     <ClInclude Include="PlaneGameDoc.h" />
     <ClInclude Include="PlaneGameView.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SurroundInterface.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BloodBar.cpp" />
     <ClCompile Include="Bomb.cpp" />
-    <ClCompile Include="BombRight.cpp" />
     <ClCompile Include="CommonFun.cpp" />
+    <ClCompile Include="DataModel.cpp" />
+    <ClCompile Include="EnemyBomb.cpp" />
     <ClCompile Include="EnemyPlane.cpp" />
+    <ClCompile Include="GameBoard.cpp" />
+    <ClCompile Include="GameBoardDefault.cpp" />
     <ClCompile Include="GameEnemyPath.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -218,7 +231,11 @@
     <ClCompile Include="GamePathArc.cpp" />
     <ClCompile Include="GamePathDefault.cpp" />
     <ClCompile Include="GamePathLine.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MyBloodBar.cpp" />
+    <ClCompile Include="MyBomb.cpp" />
+    <ClCompile Include="MyPlane.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PlaneGame.cpp" />
     <ClCompile Include="PlaneGameDoc.cpp" />
@@ -229,6 +246,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SurroundInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PlaneGame.rc" />
