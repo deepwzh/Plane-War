@@ -2,35 +2,45 @@
 #include "resource.h"
 #include "CommonFun.h"
 #include <map>
+#include "GameConfig.h"
+using Info::LevelInfo;
+using Info::BombInfo;
+using Info::PlaneInfo;
 
 class CLevel
 {
-protected:
-	int level;
-	int myplane_speed;
-	int enmey_speed;
-	int bomb_speed;
-	int scroll_speed;
-	int BK_ID;
-	std::map<CString, int> score_list; //得分列表
-	std::map<CString, int> damage_list; //伤害列表
 public:
-	int getMyplaneSpeed() {
-		return myplane_speed;
+protected:
+	CGameConfig* config;
+	LevelInfo levelInfo;
+	std::map<CString, int> score_list; //得分
+	std::map<CString, int> damage_list; //伤害
+public:
+	int getMyPlaneID()const {
+		return levelInfo.myplaneID[0];
 	}
-	int getEnmeySpeed() {
-		return enmey_speed;
+	Info::LevelInfo getLevelInfo()const {
+		return levelInfo;
 	}
-	int getBombSpeed() {
-		return bomb_speed;
+	Info::BackgroundInfo getBackGroundInfo()const {
+		return levelInfo.backinfo;
 	}
-	int getScrollSpeed() {
-		return scroll_speed;
+	Info::PathInfo getPathInfo(int i)const {
+		return config->GetPathConfig(i);
 	}
-	virtual int getLevelName() {
-		return level;
+	Info::BombInfo getBombInfo(int i) const {
+		return config->GetBombConfig(i);
 	}
-	CLevel();
+	Info::PlaneInfo getMyPlaneInfo(int i) const {
+		return config->GetPlaneConfig(i);
+	}
+	Info::PlaneInfo getEnemyInfo(int i) const {
+		return config->GetEnemyConfig(i);
+	}
+	Info::PlaneInfo getBossInfo(int i) const {
+		return config->GetBossConfig(i);
+	}
+	CLevel(int level);
 	virtual ~CLevel();
 };
 

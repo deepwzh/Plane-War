@@ -3,12 +3,10 @@
 #include "resource.h"
 #include "GameManager.h"
 
-CPlane::CPlane(CGameManager* manager, int x, int y, int speed) : CGameObject(manager, x, y), speed(speed)
+CPlane::CPlane(CGameManager* manager, int attack_value, int x, int y,int speed, int blood) : CGameObject(manager, x, y, attack_value), speed(speed),blood(blood)
 {
-
-	blood = 100;
 	team = 0;
-	id = 0;
+	index = 0;
 	cnt = 0;
 }
 BOOL CPlane::move(CCommonFun::Direction direct) {
@@ -34,11 +32,6 @@ BOOL CPlane::move(CCommonFun::Direction direct) {
 CPlane::~CPlane()
 {
 	//注意内存泄漏
-}
-// 设置飞机所使用的炸弹
-BOOL CPlane::set_bomb(CBomb * bomb)
-{
-	return 0;
 }
 
 

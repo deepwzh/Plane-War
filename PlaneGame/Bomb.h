@@ -11,10 +11,10 @@ protected:
 	int speed;
 	CGamePath* path;
 public:
-	CBomb(CGameManager* manager, int x = 0, int y = 0, int speed = 6, double offset = 0);
+	CBomb(CGameManager* manager, int attack_value, int x = 0, int y = 0, int speed = 6, double offset = 0);
 	virtual ~CBomb();
 	BOOL setPoint(CPoint point);
-	BOOL Collided(POSITION pos) = 0 ;
+	BOOL Collided(POSITION pos, CGameObject* obj) = 0 ;
 	// Í¨¹ý CGameObject ¼Ì³Ð
 	virtual BOOL draw(CDC * pDC) = 0;
 	void setPath(CGamePath* path) {

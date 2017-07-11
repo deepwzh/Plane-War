@@ -1,0 +1,96 @@
+{
+  "Backgrounds": {
+    "id": 1,
+    "speed": 13,
+    "BK_ID": 320
+  },
+  "Bosses": [
+    {
+      "id": 1,
+      "HP": 6,
+      "speed": 6,
+      "attack": 10,
+      "Bombs": [ 1 ]
+    }
+  ],
+  "MyPlanes": [
+    {
+      "id": 0,
+      "HP": 1000,
+      "speed": 6,
+      "attack": 5,
+      "Bombs": [ 2 ]
+    },
+    {
+      "id": 1,
+      "HP": 100,
+      "speed": 1,
+      "attack": 1,
+      "Bombs": [ 2 ]
+    }
+  ],
+  "Enemys": [
+    {
+      "id": 0,
+      "HP": 500,
+      "speed": 1,
+      "attack": 1,
+      "Bombs": [ 2 ]
+    },
+    {
+      "id": 1,
+      "HP": 800,
+      "speed": 10,
+      "attack": 1,
+      "Bombs": [ 2 ]
+    },
+    {
+      "id": 2,
+      "HP": 1000,
+      "speed": 7,
+      "attack": 1,
+      "Bombs": [ 2 ]
+    }
+  ],
+  "Paths": [
+    {
+      "id": 1,
+      "Name": "DefaultPath"
+    },
+    {
+      "id": 2,
+      "Name": "ArcPath"
+    },
+    {
+      "id": 3,
+      "Name": "LinePath"
+    }
+  ],
+  "Bombs": [
+    {
+      "id": "1",
+      "Name": "MyPlaneDefaultBomb",
+      "speed": 30,
+      "Hitrate": 0.7,
+      "attack": 5,
+      "pathID": [ 1 ]
+    },
+    {
+      "id": "2",
+      "Name": "EnenyDefaultBomb",
+      "speed": 3,
+      "Hitrate": 0.9,
+      "attack": 5,
+      "pathID": [ 2 ]
+    }
+  ],
+  "Levels": [
+    {
+      "Level": 1,
+      "Background": 1,
+      "MyPlaneID": [ 0, 1, 2, 3 ],
+      "EnemysID": [ 0, 1, 2 ],
+      "BossID": [ 1 ]
+    }
+  ]
+}

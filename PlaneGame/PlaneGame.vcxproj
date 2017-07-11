@@ -93,9 +93,11 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -194,13 +196,28 @@
     <ClInclude Include="EnemyPlane.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="GameBoardDefault.h" />
+    <ClInclude Include="GameConfig.h" />
+    <ClInclude Include="GameEnemyFactory.h" />
     <ClInclude Include="GameEnemyPath.h" />
+    <ClInclude Include="GameFactory.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GamePath.h" />
     <ClInclude Include="GamePathArc.h" />
     <ClInclude Include="GamePathDefault.h" />
     <ClInclude Include="GamePathLine.h" />
+    <ClInclude Include="GameMyPlaneFactory.h" />
+    <ClInclude Include="json\allocator.h" />
+    <ClInclude Include="json\assertions.h" />
+    <ClInclude Include="json\autolink.h" />
+    <ClInclude Include="json\config.h" />
+    <ClInclude Include="json\features.h" />
+    <ClInclude Include="json\forwards.h" />
+    <ClInclude Include="json\json.h" />
+    <ClInclude Include="json\reader.h" />
+    <ClInclude Include="json\value.h" />
+    <ClInclude Include="json\version.h" />
+    <ClInclude Include="json\writer.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MyBloodBar.h" />
@@ -224,13 +241,17 @@
     <ClCompile Include="EnemyPlane.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GameBoardDefault.cpp" />
+    <ClCompile Include="GameConfig.cpp" />
+    <ClCompile Include="GameEnemyFactory.cpp" />
     <ClCompile Include="GameEnemyPath.cpp" />
+    <ClCompile Include="GameFactory.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GamePath.cpp" />
     <ClCompile Include="GamePathArc.cpp" />
     <ClCompile Include="GamePathDefault.cpp" />
     <ClCompile Include="GamePathLine.cpp" />
+    <ClCompile Include="GameMyPlaneFactory.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MyBloodBar.cpp" />
@@ -252,6 +273,9 @@
     <ResourceCompile Include="PlaneGame.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="data.json">
+      <FileType>Document</FileType>
+    </Text>
     <None Include="res\PlaneGame.rc2" />
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +290,9 @@
     <Image Include="res\plane\me.bmp" />
     <Image Include="res\plane\stars.bmp" />
     <Image Include="res\Toolbar.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib_json.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

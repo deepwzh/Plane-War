@@ -2,7 +2,7 @@
 #include "Bomb.h"
 #include "resource.h"
 #include "GameManager.h"
-CBomb::CBomb(CGameManager* manager,int x, int y, int speed, double offset) : CGameObject(manager, x, y),speed(speed) ,point0(x,y), offset(offset)
+CBomb::CBomb(CGameManager* manager, int attack_value,int x, int y, int speed, double offset) : CGameObject(manager, x, y, attack_value),speed(speed) ,point0(x,y), offset(offset)
 {
 	cnt = 0;
 }

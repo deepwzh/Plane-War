@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="data.json" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlaneGame.h">
@@ -102,6 +103,51 @@
     <ClInclude Include="DataModel.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="json\allocator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\assertions.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\autolink.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\features.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\forwards.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\reader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\value.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\writer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMyPlaneFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEnemyFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlaneGame.cpp">
@@ -182,6 +228,18 @@
     <ClCompile Include="DataModel.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GameConfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMyPlaneFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEnemyFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PlaneGame.rc">
@@ -227,5 +285,8 @@
     <Image Include="res\plane\stars.bmp">
       <Filter>资源文件</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib_json.lib" />
   </ItemGroup>
 </Project>

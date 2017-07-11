@@ -10,19 +10,20 @@ CMyBomb::~CMyBomb()
 {
 }
 
-CMyBomb::CMyBomb(CGameManager* manager, int x, int y, int speed, double offset) : CBomb(manager, x, y, speed, offset)
+CMyBomb::CMyBomb(CGameManager* manager, int x, int y, int speed, double offset, int attack_value) : CBomb(manager, attack_value,x, y, speed, offset )
 {
 	cnt = 0;
 }
 
-BOOL CMyBomb::Collided(POSITION pos)
+BOOL CMyBomb::Collided(POSITION pos, CGameObject* obj)
 {
+
 	manager->removeObject(L"mineBomb", pos);
 	return 1;
 }
 BOOL CMyBomb::draw(CDC * pDC)
 {
-	int x0 = 0, y0 = 0;
+    int x0 = 0, y0 = 0;
 	int x = point.x;
 	int y = point.y;
 	path->getPosition(x0, y0, point0.x, point0.y, offset, speed);
@@ -35,11 +36,14 @@ BOOL CMyBomb::draw(CDC * pDC)
 
 BOOL CMyBomb::LoadImages()
 {
-	CCommonFun::LoadImageW(m_Images, IDB_Bomb, RGB(0, 0, 0), 1);
+	CCommonFun::LoadImageW(m_Images, IDB_MyBalls, RGB(0, 0, 0), 18);
 	return 0;
 }
 BOOL CMyBomb::Initial()
 {
-	CCommonFun::GetImageListInfo(m_Images, width, height);
+	//18   150*8=1200
+	//30 150
+  	CCommonFun::GetImageListInfo(m_Images, width, height);
+	height = 60;
 	return 0;
 }

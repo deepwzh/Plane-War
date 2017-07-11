@@ -123,10 +123,9 @@ BOOL CCommonFun::LoadImage(CImageList& imgList, UINT bmpID, COLORREF crMask, int
 	bmp.GetBitmap(&bmpinfo);
 	int width = bmpinfo.bmWidth / nInitial;
 	int height = bmpinfo.bmHeight;
-	if (!imgList.Create(width, height, ILC_COLOR32 | ILC_MASK, nInitial, 0))
+	if (!imgList.Create(width, height, ILC_COLOR32 | ILC_MASK, nInitial, 1))
 		return FALSE;
 	imgList.Add(&bmp, crMask);
-
 	return TRUE;
 }
 

@@ -2,39 +2,71 @@
 #include "GameManager.h" 
 CGameManager::CGameManager(int width , int height) : width(width), height(height)
 {
-	CLevel v;
+	myPlane = NULL;
+	NN = 0;
 	cnt = 0;
-	shoot_mode = 1;
+	level = new CLevel(1);
+	myplaneFactory = new CGameMyPlaneFactory(this, level);
+	enemyplaneFactory = new CGameEnemyFactory(this, level);
+
+	InitLevel(1);
 	board = new CGameBoardDefault(CPoint(0,0),width,height);
 	model = new CDataModel(board);
+
 	m_ObjList = new CObList[5];
+}
+
+//初始化关卡
+void CGameManager::InitLevel(int index) {
 	CMyPlane::LoadImages();
 	CMyBomb::LoadImages();
 	CEnemyBomb::LoadImages();
 	CEnemyPlane::LoadImages();
-	myPlane = new CMyPlane(this,width/2,height/2,6);
+	if(myPlane)
+		delete myPlane;
+	info = level->getLevelInfo();
+	int my_speed = level->getMyPlaneInfo(info.myplaneID[0]).speed;
+
+	myPlane = (CMyPlane*)myplaneFactory->createObject(width / 2, height / 2);
 	//启动游戏
-	myPlane->Initial();
 }
+
+//实现升级
+void CGameManager::LevelUp() {
+	int tmp = getLevelInfo().level;
+	level = new CLevel(tmp + 1);
+	InitLevel(tmp + 1);
+}
+
+
+//绘制游戏
 void CGameManager::draw(CDC * m_pMemDC) {
 	//TRACE("%d %d\n", game_manager->getWidth(), game_manager->getHeight());
 	//m_pMemDC->FillSolidRect(0, 0, getWidth(), getHeight(), RGB(84, 142, 239));
-	
+	CDC memdc;
+	memdc.CreateCompatibleDC(m_pMemDC);
 	//绘制背景相关
 	CBitmap   bitmap;
-	bitmap.LoadBitmap(IDB_BG1);   //这个IDB_BITMAP1要自己添加
-	CBrush   brush;
-	brush.CreatePatternBrush(&bitmap);
-	CBrush*   pOldBrush = m_pMemDC->SelectObject(&brush);
-	m_pMemDC->Rectangle(0, 0, width, height);  // 这些参数可以调整图片添加位置和大小
-	m_pMemDC->SelectObject(pOldBrush);
 	
+	bitmap.LoadBitmap(getLevelInfo().backinfo.BK_ID);   //这个IDB_BITMAP1要自己添加
+	BITMAP bitinfo;
+	bitmap.GetBitmap(&bitinfo);
+	//CBrush   brush;
+	//brush.CreatePatternBrush(&bitmap);
+	//CBrush*   pOldBrush = m_pMemDC->SelectObject(&brush);
+	memdc.SelectObject(&bitmap);
+	m_pMemDC->StretchBlt(0, NN, width, height, &memdc, 0, 0, bitinfo.bmWidth, bitinfo.bmHeight, SRCCOPY);
+	m_pMemDC->StretchBlt(0, -height + NN, width, height, &memdc, 0, 0, bitinfo.bmWidth, bitinfo.bmHeight, SRCCOPY);
+
+	//m_pMemDC->Rectangle(0, NN, width, height);  // 这些参数可以调整图片添加位置和大小
+	//m_pMemDC->Rectangle(0, -height + NN, width, height);  // 这些参数可以调整图片添加位置和大小
+	// m_pMemDC->SelectObject(pOldBrush);
+	NN += getLevelInfo().backinfo.speed;
+	if ( NN > height) NN = 0;
 	//绘制比赛的榜单
 	model->push();
 	board->draw(m_pMemDC);
 
-	scroll_speed+=1;
-	scroll_speed;
 	if (myPlane)
 		myPlane->draw(m_pMemDC);
 	else {
@@ -54,11 +86,11 @@ void CGameManager::draw(CDC * m_pMemDC) {
 		CRect tmpRect;
 		ASSERT(pBomb);
 		if (tmpRect.IntersectRect(&pBomb->getRect(), myPlane->getRect())) {
-			if (pBomb->Collided(_mPos)) {
+			if (pBomb->Collided(_mPos, NULL)) {
 				delete pBomb;
 				pBomb = NULL;
 			}
-			if (myPlane->Collided(NULL) && !is_god) {
+			if (myPlane->Collided(NULL, pBomb) && !is_god) {
 				delete myPlane;
 				myPlane = NULL;
 			}
@@ -74,24 +106,6 @@ void CGameManager::draw(CDC * m_pMemDC) {
 			pBomb->draw(m_pMemDC);
 	}
 
-	for (mPos = list[mineBomb].GetHeadPosition(); (_mPos = mPos) != NULL; ) {
-		if (!myPlane) {
-			return;
-		}
-		CMyBomb * pBomb = (CMyBomb*)list[mineBomb].GetNext(mPos);
-		CRect tmpRect;
-		ASSERT(pBomb);
-		CRect brect = pBomb->getRect();
-		if (!pBomb) continue;
-
-		if (is_InRange(pBomb)) {
-			this->removeObject(L"mineBomb", _mPos);
-			delete pBomb;
-			pBomb = NULL;
-		}
-		else
-			pBomb->draw(m_pMemDC);
-	}
 
 	mPos = NULL;
 	_mPos = NULL;
@@ -110,11 +124,11 @@ void CGameManager::draw(CDC * m_pMemDC) {
 			ASSERT(pBomb);
 			CRect brect = pBomb->getRect();
 			if (tmpRect.IntersectRect(&brect, prect)) {
-				if (pBomb->Collided(_mPos1)) {
+				if (pBomb->Collided(_mPos1, NULL)) {
 					delete pBomb;
 					pBomb = NULL;
 				}
-				if (pPlane->Collided(_mPos)) {
+				if (pPlane->Collided(_mPos, pBomb)) {
 					delete pPlane;
 					pPlane = NULL;
 					break;
@@ -135,26 +149,45 @@ void CGameManager::draw(CDC * m_pMemDC) {
 		else
 			pPlane->draw(m_pMemDC);
 		if (pPlane && myPlane && tmpRect.IntersectRect(pPlane->getRect(), myPlane->getRect())) {
-			if (myPlane->Collided(NULL)&&!is_god) {
+			if (myPlane->Collided(NULL, pPlane)&&!is_god) {
 				delete myPlane;
 				myPlane = NULL;
 			}
-			if (pPlane->Collided(_mPos)) {
+			if (pPlane->Collided(_mPos, myPlane)) {
 
 				delete pPlane;
 				pPlane = NULL;
 			}
 		}
 	}
+	for (mPos = list[mineBomb].GetHeadPosition(); (_mPos = mPos) != NULL; ) {
+		if (!myPlane) {
+			return;
+		}
+		CMyBomb * pBomb = (CMyBomb*)list[mineBomb].GetNext(mPos);
+		CRect tmpRect;
+		ASSERT(pBomb);
+		CRect brect = pBomb->getRect();
+		if (!pBomb) continue;
+
+		if (is_InRange(pBomb)) {
+			this->removeObject(L"mineBomb", _mPos);
+			delete pBomb;
+			pBomb = NULL;
+		}
+		else
+			pBomb->draw(m_pMemDC);
+	}
+
 }
 void CGameManager::AI() {
 	cnt++;
-	int t = rand() % 20 + 1;
+	int t = rand() % 60 + 1;
 	if (cnt%t == 0) {
-		CEnemyPlane* ep1 = new CEnemyPlane(this, rand() % this->width, 0);
-		ep1->Initial();
+		enemyplaneFactory->switchNthObject(rand() % enemyplaneFactory->getCount());
+		CEnemyPlane* ep1 = (CEnemyPlane*)enemyplaneFactory->createObject(rand() % this->width, 0);
 		this->registerObject(L"enPlane",ep1);
-		ep1->attack(1);
+		ep1->attack(5);
 		cnt = 0;
 	}
 }
@@ -187,7 +220,13 @@ void CGameManager::HandleKeyMap()
 		switchPlane();
 	}
 	if (GetKeyState(VK_SPACE) < 0) {
-		myPlane->attack(10);
+		//int attack = level->getMyPlaneInfo(getLevelInfo().myplaneID[0]).attack;
+		myPlane->attack(5);
+	}
+	if (GetKeyState('R') & 0x8000?1:0) {
+		//int attack = level->getMyPlaneInfo(getLevelInfo().myplaneID[0]).attack;
+		myplaneFactory->switchObject();
+		myPlane = (CMyPlane*)myplaneFactory->createObject(myPlane);
 	}
 }
 // 判断是否在屏幕区域内
@@ -209,10 +248,15 @@ void CGameManager::setRect(int w, int h)
 	height = h;
 }
 
+//在析构函数中进行内存释放
 CGameManager::~CGameManager()
 {
+	delete level;
+	delete board;
+	delete model;
+	delete m_ObjList;
+	delete myPlane;
 }
-
 
 CGameManager::GameState CGameManager::getState()
 {
@@ -248,7 +292,6 @@ bool CGameManager::PauseGame()
 	this->setState(GameState::Pause);
 	return false;
 }
-
 
 bool CGameManager::StopGame()
 {

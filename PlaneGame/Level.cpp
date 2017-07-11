@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "Level.h"
-CLevel::CLevel()
+CLevel::CLevel(int index)
 {
-	char buf[1000] = "{'name':'hello','age':15}";
+	config = new CGameConfig(L"data.json");
+	levelInfo = config->GetLevelConfig(index);
 }
-
 
 CLevel::~CLevel()
 {
+	delete config;
 }

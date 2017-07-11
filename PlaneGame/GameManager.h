@@ -8,25 +8,44 @@
 #include "resource.h"
 #include "EnemyPlane.h"
 #include "MyPlane.h"
+#include "GameMyPlaneFactory.h"
+#include "GameEnemyFactory.h"
+
 #define enPlane 0
 #define enBomb 1
 #define minePlane 2
 #define mineBomb 3
 #define buff 4
+using namespace Info;
 class CGameManager
 {
-protected:
-	CDataModel* model;
-	CGameBoard* board;
 public:
-	CGameManager(int width = 0, int height = 0);
 	enum GameState {
 		Start = 1,
 		End = 2,
 		Pause = 3,
 		GodStart = 4
-
 	};
+protected:
+	CGameMyPlaneFactory* myplaneFactory;
+	CGameEnemyFactory* enemyplaneFactory;
+protected:
+	int NN = 0;
+	CDataModel* model;
+	CGameBoard* board;
+	CMyPlane * myPlane;
+	CLevel *level;
+	LevelInfo info;
+	int is_god;
+	GameState state;
+	CObList* m_ObjList;
+	int height;
+	int width;
+	int cnt;
+public:
+	LevelInfo getLevelInfo() { return info; }
+	CGameManager(int width = 0, int height = 0);
+	void InitLevel(int index);
 	void AI();
 	void switchPlane();
 	void HandleKeyMap();
@@ -59,16 +78,6 @@ public:
 	}
 	void draw(CDC *m_pMemDC);
 	~CGameManager();
-protected:
-	int scroll_speed = 0;
-	int is_god;
-	GameState state;
-	int shoot_mode;
-	CObList* m_ObjList;
-	int height;
-	int width;
-	int cnt;
-	CMyPlane * myPlane;
 //	CPoint point;
 public:
 	GameState getState();
@@ -78,5 +87,6 @@ public:
 	int getWidth();
 	int StartGame(bool is_god);
 	bool PauseGame();
+	void LevelUp();
 	bool StopGame();
 };

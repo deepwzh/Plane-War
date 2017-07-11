@@ -82,19 +82,51 @@ IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
 IDB_Ball                BITMAP                  "res\\plane\\ball.BMP"
 
-IDB_BITMAP2             BITMAP                  "res\\plane\\bitmap2.bmp"
-
 IDB_Bomb                BITMAP                  "res\\plane\\bomb.bmp"
 
 IDB_Enemy               BITMAP                  "res\\plane\\enemy.bmp"
 
 IDB_BITMAP5             BITMAP                  "res\\plane\\explosion.BMP"
 
-IDB_MyPlane             BITMAP                  "res\\plane\\me.bmp"
-
 IDB_BG2                 BITMAP                  "res\\plane\\lands.bmp"
 
 IDB_BG1                 BITMAP                  "res\\plane\\stars.bmp"
+
+IDB_MyPlane             BITMAP                  "res\\plane\\me.bmp"
+
+IDB_BG_1             BITMAP                  "res\\image\\background1.bmp"
+
+IDB_BG_2             BITMAP                  "res\\image\\background2.bmp"
+
+IDB_BG_3            BITMAP                  "res\\image\\background3.bmp"
+
+IDB_BG_4            BITMAP                  "res\\image\\background4.bmp"
+
+IDB_BG_5            BITMAP                  "res\\image\\background5.bmp"
+
+IDB_BG_6            BITMAP                  "res\\image\\background6.bmp"
+
+IDB_BG_7            BITMAP                  "res\\image\\background7.bmp"
+
+IDB_EnemyBombs            BITMAP                  "res\\image\\balldown.bmp"
+
+IDB_MyBombs             BITMAP                  "res\\image\\ballup.bmp"
+
+IDB_Buffs               BITMAP                  "res\\image\\blood.bmp"
+
+IDB_MyBalls             BITMAP                  "res\\image\\bomb.bmp"
+
+IDB_BITMAP19            BITMAP                  "res\\image\\bomb1.bmp"
+
+IDB_Bosses            BITMAP                  "res\\image\\boss.bmp"
+
+IDB_Enemys              BITMAP                  "res\\image\\enemyDown.bmp"
+
+IDB_Explosions            BITMAP                  "res\\image\\explosion.BMP"
+
+IDB_MyPlanes            BITMAP                  "res\\image\\me1.bmp"
+
+IDB_Protect            BITMAP                  "res\\image\\protect.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

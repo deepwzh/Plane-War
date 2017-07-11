@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "GameObject.h"
 
 #define min3v(v1, v2, v3)   ((v1)>(v2)? ((v2)>(v3)?(v3):(v2)):((v1)>(v3)?(v3):(v2)))  

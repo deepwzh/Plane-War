@@ -11,12 +11,11 @@ class  CPlane :
 	public CGameObject
 {
 public:
-	CPlane(CGameManager* manager, int x = 0, int y = 0, int speed = 6);
+	CPlane(CGameManager* manager, int attack_value, int x = 0, int y = 0, int speed = 6, int blood = 300);
 	virtual ~CPlane();
 	virtual BOOL move(CCommonFun::Direction direct);
-
 	// 通过 CGameObject 继承
-	virtual BOOL Collided(POSITION pos)  override = 0;
+	virtual BOOL Collided(POSITION pos, CGameObject* obj)  override = 0;
 	// 通过 CGameObject 继承
 	virtual BOOL draw(CDC* pDC) override = 0;
 protected:
@@ -24,12 +23,17 @@ protected:
 	bool is_fired;
 	int blood;
 	int team;
-	int id;
+	int bomb;
+	int index;
 	int cnt;
 	CBloodBar* bloodbar;
 public:
+	virtual void setIndex(int index) {
+		this->index = index;
+	}
 	// 设置飞机所使用的炸弹
-	virtual BOOL set_bomb(CBomb* bomb);
+	virtual BOOL switch_bomb() = 0;
+	virtual BOOL switch_nth_bomb() = 0;
 protected:
 	CBomb* bomb;
 public:
@@ -38,6 +42,4 @@ public:
 	// 通过 CGameObject 继承
 	int getHP() const;
 	bool setHP(int hp);
-
 };
-
