@@ -46,6 +46,7 @@ public:
 	CLevel* getLevel() { return level; }
 	LevelInfo getLevelInfo() { return info; }
 	CGameManager(int width = 0, int height = 0);
+	void InitConnect();
 	void InitLevel(int index);
 	void AI();
 	void HandleKeyMap();

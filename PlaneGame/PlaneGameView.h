@@ -4,7 +4,7 @@
 
 #pragma once
 #include "GameManager.h"
-
+#include "SockConnect.h"
 
 class CPlaneGameView : public CView
 {

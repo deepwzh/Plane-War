@@ -190,6 +190,7 @@
   <ItemGroup>
     <ClInclude Include="BloodBar.h" />
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="CharsetConvert.h" />
     <ClInclude Include="CommonFun.h" />
     <ClInclude Include="DataModel.h" />
     <ClInclude Include="EnemyBomb.h" />
@@ -229,6 +230,7 @@
     <ClInclude Include="PlaneGameDoc.h" />
     <ClInclude Include="PlaneGameView.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SockConnect.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SurroundInterface.h" />
     <ClInclude Include="targetver.h" />
@@ -236,6 +238,7 @@
   <ItemGroup>
     <ClCompile Include="BloodBar.cpp" />
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="CharsetConvert.cpp" />
     <ClCompile Include="CommonFun.cpp" />
     <ClCompile Include="DataModel.cpp" />
     <ClCompile Include="EnemyBomb.cpp" />
@@ -263,6 +266,7 @@
     <ClCompile Include="PlaneGame.cpp" />
     <ClCompile Include="PlaneGameDoc.cpp" />
     <ClCompile Include="PlaneGameView.cpp" />
+    <ClCompile Include="SockConnect.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

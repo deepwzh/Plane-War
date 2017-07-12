@@ -8,13 +8,16 @@ CGameManager::CGameManager(int width , int height) : width(width), height(height
 	level = new CLevel(1);
 	myplaneFactory = new CGameMyPlaneFactory(this, level);
 	enemyplaneFactory = new CGameEnemyFactory(this, level);
-
 	InitLevel(1);
 	model = new CDataModel();
 	board = new CGameBoardDefault(model,CPoint(100,10),width,height);
-
 	m_ObjList = new CObList[5];
 }
+
+void CGameManager::InitConnect() {
+
+}
+
 //³õÊ¼»¯¹Ø¿¨
 void CGameManager::InitLevel(int index) {
 	CMyPlane::LoadImages();

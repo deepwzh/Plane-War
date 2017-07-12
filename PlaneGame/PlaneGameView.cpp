@@ -107,7 +107,7 @@ void CPlaneGameView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 BOOL CPlaneGameView::InitGame()
 {
 	CView::OnInitialUpdate();
-
+	CSockConnect();
 	CPlaneGameDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
