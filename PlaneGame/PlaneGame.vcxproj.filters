@@ -148,6 +148,9 @@
     <ClInclude Include="GameEnemyFactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GameMyBombFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlaneGame.cpp">
@@ -238,6 +241,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GameEnemyFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMyBombFactory.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

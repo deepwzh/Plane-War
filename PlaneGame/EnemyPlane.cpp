@@ -4,7 +4,6 @@
 CImageList CEnemyPlane::m_Images;
 CEnemyPlane::CEnemyPlane(CGameManager* manager, int x, int y, int speed, int blood, int attack_value): CPlane(manager, attack_value, x, y, speed, blood)
 {
-	this->bomb = new CEnemyBomb(manager,0,0,5,0,5);
 }
 
 BOOL CEnemyPlane::draw(CDC* pDC)
@@ -29,6 +28,7 @@ BOOL CEnemyPlane::Collided(POSITION pos, CGameObject* obj)
 	if (obj == NULL) return 0;
 	if (!this->setHP(-obj->get_attack())) {
 		manager->removeObject(L"enPlane", pos);
+		manager->getModel()->setScore(+this->attack_value);
 		return 1;
 	}
 	return 0;
@@ -39,11 +39,10 @@ BOOL CEnemyPlane::attack(int n = 1)
 	cnt++;
 	if (cnt % 30 == 0) {
 		cnt = 0;
-		this->bomb->setPoint(CPoint(point));
 		double offset = -0.5 - 0.5 / n;
 		for (int i = 0; i < n; i++) {
 			offset += (1.0 / n);
-			CBomb* bomb1 = new CEnemyBomb(manager, bomb->getRect().left + 20, bomb->getRect().top, 20, offset,5);
+			CBomb* bomb1 = new CEnemyBomb(manager, point.x + 20, point.y, 20, offset,5);
 			bomb1->Initial();
 			bomb1->setPath(new CGameEnemyPath());
 			manager->registerObject(L"enBomb", bomb1);

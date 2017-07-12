@@ -19,14 +19,14 @@
       "HP": 1000,
       "speed": 6,
       "attack": 5,
-      "Bombs": [ 2 ]
+      "Bombs": [ 0 ,1]
     },
     {
       "id": 1,
       "HP": 100,
       "speed": 1,
       "attack": 1,
-      "Bombs": [ 2 ]
+      "Bombs": [ 0 ]
     }
   ],
   "Enemys": [
@@ -35,21 +35,21 @@
       "HP": 500,
       "speed": 1,
       "attack": 1,
-      "Bombs": [ 2 ]
+      "Bombs": [ 0 ]
     },
     {
       "id": 1,
       "HP": 800,
       "speed": 10,
       "attack": 1,
-      "Bombs": [ 2 ]
+      "Bombs": [ 0 ]
     },
     {
       "id": 2,
       "HP": 1000,
       "speed": 7,
       "attack": 1,
-      "Bombs": [ 2 ]
+      "Bombs": [ 0 ]
     }
   ],
   "Paths": [
@@ -68,19 +68,19 @@
   ],
   "Bombs": [
     {
-      "id": "1",
+      "id": 0,
       "Name": "MyPlaneDefaultBomb",
       "speed": 30,
       "Hitrate": 0.7,
-      "attack": 5,
+      "attack": 50,
       "pathID": [ 1 ]
     },
     {
-      "id": "2",
+      "id": 1,
       "Name": "EnenyDefaultBomb",
       "speed": 3,
       "Hitrate": 0.9,
-      "attack": 5,
+      "attack": 50,
       "pathID": [ 2 ]
     }
   ],

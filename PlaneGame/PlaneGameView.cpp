@@ -115,7 +115,7 @@ BOOL CPlaneGameView::InitGame()
 	CRect rect;
 	this->GetClientRect(&rect);
 	game_manager = new CGameManager(rect.right - rect.left, rect.bottom - rect.top);
-	TRACE("%d %d\n", rect.right - rect.left, rect.bottom - rect.top);
+	//TRACE("%d %d\n", rect.right - rect.left, rect.bottom - rect.top);
 	//建立设备DC
 	m_pDC = new CClientDC(this);
 

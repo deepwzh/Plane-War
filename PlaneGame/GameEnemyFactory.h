@@ -1,5 +1,6 @@
 #pragma once
 #include "GameFactory.h"
+#include "EnemyPlane.h"
 class CGameEnemyFactory :
 	public CGameFactory
 {
@@ -9,9 +10,9 @@ public:
 
 	virtual int getCount();
 
-	// 通过 CGameFactory 继承
-	virtual int switchObject() override;
-	virtual int switchNthObject(int index) override;
 	virtual CGameObject * createObject(int x, int y) override;
+
+	// 通过 CGameFactory 继承
+	virtual CGameObject * createObject(CGameObject * obj) override;
 };
 

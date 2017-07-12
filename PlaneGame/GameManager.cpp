@@ -10,12 +10,11 @@ CGameManager::CGameManager(int width , int height) : width(width), height(height
 	enemyplaneFactory = new CGameEnemyFactory(this, level);
 
 	InitLevel(1);
-	board = new CGameBoardDefault(CPoint(0,0),width,height);
-	model = new CDataModel(board);
+	model = new CDataModel();
+	board = new CGameBoardDefault(model,CPoint(100,10),width,height);
 
 	m_ObjList = new CObList[5];
 }
-
 //初始化关卡
 void CGameManager::InitLevel(int index) {
 	CMyPlane::LoadImages();
@@ -64,7 +63,7 @@ void CGameManager::draw(CDC * m_pMemDC) {
 	NN += getLevelInfo().backinfo.speed;
 	if ( NN > height) NN = 0;
 	//绘制比赛的榜单
-	model->push();
+	//model->push();
 	board->draw(m_pMemDC);
 
 	if (myPlane)
@@ -124,14 +123,14 @@ void CGameManager::draw(CDC * m_pMemDC) {
 			ASSERT(pBomb);
 			CRect brect = pBomb->getRect();
 			if (tmpRect.IntersectRect(&brect, prect)) {
-				if (pBomb->Collided(_mPos1, NULL)) {
-					delete pBomb;
-					pBomb = NULL;
-				}
 				if (pPlane->Collided(_mPos, pBomb)) {
 					delete pPlane;
 					pPlane = NULL;
 					break;
+				}
+				if (pBomb->Collided(_mPos1, NULL)) {
+					delete pBomb;
+					pBomb = NULL;
 				}
 				is_exist = 0;
 			}
@@ -178,11 +177,10 @@ void CGameManager::draw(CDC * m_pMemDC) {
 		else
 			pBomb->draw(m_pMemDC);
 	}
-
 }
 void CGameManager::AI() {
 	cnt++;
-	int t = rand() % 60 + 1;
+	int t = rand() % 300 + 1;
 	if (cnt%t == 0) {
 		enemyplaneFactory->switchNthObject(rand() % enemyplaneFactory->getCount());
 		CEnemyPlane* ep1 = (CEnemyPlane*)enemyplaneFactory->createObject(rand() % this->width, 0);
@@ -191,10 +189,6 @@ void CGameManager::AI() {
 		cnt = 0;
 	}
 }
-void CGameManager::switchPlane() {
-
-}
-
 void CGameManager::HandleKeyMap()
 {
 	if (!myPlane)
@@ -216,9 +210,6 @@ void CGameManager::HandleKeyMap()
 		if (!(dir & CCommonFun::D))
 			myPlane->move(CCommonFun::D);
 	}
-	if (GetKeyState(VK_TAB) < 0) {
-		switchPlane();
-	}
 	if (GetKeyState(VK_SPACE) < 0) {
 		//int attack = level->getMyPlaneInfo(getLevelInfo().myplaneID[0]).attack;
 		myPlane->attack(5);
@@ -227,6 +218,9 @@ void CGameManager::HandleKeyMap()
 		//int attack = level->getMyPlaneInfo(getLevelInfo().myplaneID[0]).attack;
 		myplaneFactory->switchObject();
 		myPlane = (CMyPlane*)myplaneFactory->createObject(myPlane);
+	}
+	if (GetKeyState('Z') & 0x8000) {
+		myPlane->switch_bomb();
 	}
 }
 // 判断是否在屏幕区域内
@@ -296,5 +290,13 @@ bool CGameManager::PauseGame()
 bool CGameManager::StopGame()
 {
 	this->setState(GameState::End);
+	delete m_ObjList;
+	//delete myPlane = NULL;
+	delete level;
+	delete myplaneFactory;
+	delete enemyplaneFactory;
+	InitLevel(1);
+	delete board;
+	delete model;
 	return false;
 }

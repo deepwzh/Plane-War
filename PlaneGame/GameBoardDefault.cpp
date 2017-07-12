@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "GameBoardDefault.h"
 
-CGameBoardDefault::CGameBoardDefault(CPoint point, int width, int height): CGameBoard(point,width,height)
-
+CGameBoardDefault::CGameBoardDefault(CDataModel* model, CPoint point, int width, int height): CGameBoard(model, point,width,height)
 {
 
 }
@@ -16,13 +15,15 @@ void CGameBoardDefault::draw(CDC * pDC)
 {
 	pDC->SetTextColor(RGB(255, 255, 255));
 	pDC->SetBkColor(RGB(0, 0, 0));
-	pDC->TextOutW(point.x, point.y, L"HELLO", 5);
+	CString s;
+	s.Format(L"%d", model->getScore());
+	pDC->TextOutW(point.x, point.y, L"·ÖÊı£º" + s);
 
 }
 
-void CGameBoardDefault::update(int n, ...) {
-	va_list pvar;
-	va_start(pvar, n);
-	int t = va_arg(pvar, int);
-	va_end(pvar);
-}
+//void CGameBoardDefault::update(int n, ...) {
+//	va_list pvar;
+//	va_start(pvar, n);
+//	int t = va_arg(pvar, int);
+//	va_end(pvar);
+//}

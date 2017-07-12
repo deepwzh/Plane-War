@@ -196,6 +196,7 @@
     <ClInclude Include="EnemyPlane.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="GameBoardDefault.h" />
+    <ClInclude Include="GameMyBombFactory.h" />
     <ClInclude Include="GameConfig.h" />
     <ClInclude Include="GameEnemyFactory.h" />
     <ClInclude Include="GameEnemyPath.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="EnemyPlane.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GameBoardDefault.cpp" />
+    <ClCompile Include="GameMyBombFactory.cpp" />
     <ClCompile Include="GameConfig.cpp" />
     <ClCompile Include="GameEnemyFactory.cpp" />
     <ClCompile Include="GameEnemyPath.cpp" />

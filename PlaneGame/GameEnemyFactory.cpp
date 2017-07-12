@@ -6,20 +6,6 @@ CGameEnemyFactory::CGameEnemyFactory(CGameManager* manager, CLevel* level) : CGa
 {
 	index = 0;
 }
-
-int CGameEnemyFactory::switchObject()
-{
-	this->index++;
-	index %= getCount();
-	return index;
-}
-
-int CGameEnemyFactory::switchNthObject(int index)
-{
-	if (index > getCount())return -1;
-	this->index = index;
-	return index;
-}
 CGameEnemyFactory::~CGameEnemyFactory()
 {
 }
@@ -35,5 +21,12 @@ CGameObject * CGameEnemyFactory::createObject(int x, int y)
 	CEnemyPlane * plane = new CEnemyPlane(manager, x, y, info.speed, info.HP, info.attack);
 	plane->setIndex(lInfo.enemyIDs[index]);
 	plane->Initial();
+	return plane;
+}
+
+CGameObject * CGameEnemyFactory::createObject(CGameObject * obj)
+{
+	CEnemyPlane * plane = (CEnemyPlane*)obj;
+	plane->setIndex(index);
 	return plane;
 }

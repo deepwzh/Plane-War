@@ -29,7 +29,7 @@ BOOL CMyBomb::draw(CDC * pDC)
 	path->getPosition(x0, y0, point0.x, point0.y, offset, speed);
 	point.y -= y0;
 	point.x += x0;
-	m_Images.Draw(pDC, 0, point, ILD_TRANSPARENT);
+	m_Images.Draw(pDC, index, point, ILD_TRANSPARENT);
 	TRACE("%d %d\n", width, height);
 	return TRUE;
 }

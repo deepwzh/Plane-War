@@ -23,19 +23,13 @@ protected:
 	bool is_fired;
 	int blood;
 	int team;
-	int bomb;
-	int index;
 	int cnt;
 	CBloodBar* bloodbar;
 public:
-	virtual void setIndex(int index) {
-		this->index = index;
-	}
 	// 设置飞机所使用的炸弹
 	virtual BOOL switch_bomb() = 0;
 	virtual BOOL switch_nth_bomb() = 0;
 protected:
-	CBomb* bomb;
 public:
 	// 发动攻击
 	virtual BOOL attack(int n) = 0;

@@ -8,19 +8,7 @@ CGameMyPlaneFactory::CGameMyPlaneFactory(CGameManager* manager, CLevel* level) :
 CGameMyPlaneFactory::~CGameMyPlaneFactory()
 {
 }
-int CGameMyPlaneFactory::switchObject()
-{
-	this->index++;
-	index %= getCount();
-	return index;
-}
 
-int CGameMyPlaneFactory::switchNthObject(int index)
-{
-	if (index > getCount())return -1;
-	this->index = index;
-	return index;
-}
 CGameObject * CGameMyPlaneFactory::createObject(CGameObject * obj)
 {
 	CPlane* plane = (CPlane*)obj;

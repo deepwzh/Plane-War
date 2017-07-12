@@ -43,11 +43,11 @@ protected:
 	int width;
 	int cnt;
 public:
+	CLevel* getLevel() { return level; }
 	LevelInfo getLevelInfo() { return info; }
 	CGameManager(int width = 0, int height = 0);
 	void InitLevel(int index);
 	void AI();
-	void switchPlane();
 	void HandleKeyMap();
 	// 判断是否在屏幕区域内
 	int is_InRange(CGameObject* ob);
@@ -80,6 +80,7 @@ public:
 	~CGameManager();
 //	CPoint point;
 public:
+	CDataModel* getModel() { return model; }
 	GameState getState();
 	void setState(GameState state);
 

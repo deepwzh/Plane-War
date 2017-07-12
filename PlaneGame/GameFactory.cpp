@@ -5,7 +5,16 @@ CGameFactory::CGameFactory(CGameManager* manager, const CLevel* level) : level(l
 {
 	index = 0;
 }
-
+int CGameFactory::switchObject() {
+	this->index++;
+	index %= getCount();
+	return index;
+}
+int CGameFactory::switchNthObject(int index) {
+	if (index > getCount())return -1;
+	this->index = index;
+	return index;
+}
 CGameFactory::~CGameFactory()
 {
 }
