@@ -15,6 +15,7 @@ BOOL CMyPlane::Collided(POSITION pos, CGameObject* obj)
 }
 BOOL CMyPlane::draw(CDC* pDC)
 {
+	//manager->getModel()->setMyPoint(point);
 	if (sleep_time > 0) {
 		sleep_time--;
 	}

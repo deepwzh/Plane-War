@@ -1,18 +1,17 @@
 #pragma once
 #include "CharsetConvert.h"
-class CSocket;
+
+
 class CSockConnect
 {
 protected:
 	CString IP;
 	int Port;
-	CSocket* sock;
 public:
-	char * UnicodeToUTF8(const wchar_t * str);
-	int BuildConnect();
-	char * ReceiveMessage();
-	int SendHeartPackage();
-	int SendInfo(CString str);
+	static char * UnicodeToUTF8(const wchar_t * str);
+	SOCKET GetSocket();
+	//void SendAMessage(CString str);
+	//static UINT MyThreadProc(LPVOID pParam);
 	CSockConnect();
 	virtual ~CSockConnect();
 };

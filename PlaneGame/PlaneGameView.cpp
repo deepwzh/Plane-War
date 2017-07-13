@@ -103,11 +103,10 @@ void CPlaneGameView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	CView::OnKeyDown(nChar, nRepCnt, nFlags);
 }
-
+CSockConnect *aSocket;
 BOOL CPlaneGameView::InitGame()
 {
 	CView::OnInitialUpdate();
-	//CSockConnect();
 	CPlaneGameDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
@@ -132,7 +131,7 @@ BOOL CPlaneGameView::InitGame()
 
 	//产生主角(战机)
 	game_manager->StartGame(true);
-	SetTimer(1, 20, NULL);
+	SetTimer(1, 2000, NULL);
 	
 	return TRUE;
 }
@@ -142,6 +141,7 @@ void CPlaneGameView::OnTimer(UINT_PTR nIDEvent)
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
 	CPlaneGameDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
+
 	if (!pDoc)
 		return;
 	if (game_manager->getState() ==  CGameManager::End) {

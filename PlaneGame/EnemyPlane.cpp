@@ -8,6 +8,7 @@ CEnemyPlane::CEnemyPlane(CGameManager* manager, int x, int y, int speed, int blo
 
 BOOL CEnemyPlane::draw(CDC* pDC)
 {
+
 	point.y += speed;
 	//TRACE("%d %d\n", width, height);
 	//CBrush wbrush(RGB(255, 255, 255));

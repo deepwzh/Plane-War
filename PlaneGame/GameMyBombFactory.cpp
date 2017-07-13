@@ -23,6 +23,7 @@ void CGameMyBombFactory::setLevel(CLevel* level, int pindex) {
 
 CGameObject * CGameMyBombFactory::createObject(int x, int y,double offset)
 {
+	if (index >= getCount())index = 0;
 	Info::BombInfo info = level->getBombInfo(pInfo.bombs[index]);
 	CBomb * bomb = new CMyBomb(manager, x, y, info.speed, offset, info.attack);
 	bomb->setIndex(pInfo.bombs[index]);
@@ -32,6 +33,8 @@ CGameObject * CGameMyBombFactory::createObject(int x, int y,double offset)
 
 CGameObject * CGameMyBombFactory::createObject(CGameObject * obj)
 {
+	if (index >= getCount())index = 0;
+
 	Info::BombInfo info = level->getBombInfo(pInfo.bombs[index]);
 	CBomb * bomb = (CBomb*)obj;
 	bomb->setIndex(pInfo.bombs[index]);

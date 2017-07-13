@@ -16,6 +16,7 @@ int CGameEnemyFactory::getCount()
 
 CGameObject * CGameEnemyFactory::createObject(int x, int y)
 {
+	if (index >= getCount())index = 0;
 	LevelInfo lInfo = level->getLevelInfo();
 	Info::PlaneInfo info = level->getEnemyInfo(lInfo.enemyIDs[index]);
 	CEnemyPlane * plane = new CEnemyPlane(manager, x, y, info.speed, info.HP, info.attack);
@@ -26,6 +27,7 @@ CGameObject * CGameEnemyFactory::createObject(int x, int y)
 
 CGameObject * CGameEnemyFactory::createObject(CGameObject * obj)
 {
+	if (index >= getCount())index = 0;
 	LevelInfo lInfo = level->getLevelInfo();
 	CEnemyPlane * plane = (CEnemyPlane*)obj;
 	plane->setIndex(lInfo.enemyIDs[index]);

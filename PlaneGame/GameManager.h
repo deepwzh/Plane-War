@@ -1,5 +1,6 @@
 #pragma once
 #include "Level.h"
+#include "SockConnect.h"
 #include "DataModel.h"
 #include "GameBoardDefault.h"
 #include "CommonFun.h"
@@ -28,6 +29,7 @@ public:
 		GodStart = 4
 	};
 protected:
+	char buf[1024 + 1];
 	CGameMyPlaneFactory* myplaneFactory;
 	CGameEnemyFactory* enemyplaneFactory;
 protected:
@@ -87,6 +89,7 @@ public:
 	CObList* getList() {
 		return m_ObjList;
 	}
+	CSockConnect* aSocket;
 	void draw(CDC *m_pMemDC);
 	~CGameManager();
 //	CPoint point;

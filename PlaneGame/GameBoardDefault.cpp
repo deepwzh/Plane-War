@@ -22,7 +22,8 @@ void CGameBoardDefault::draw(CDC * pDC)
 	pDC->TextOutW(point.x , point.y + 30, L"等级：" + s);
 	s.Format(L"%d", model->getSleepTime());
 	pDC->TextOutW(point.x, point.y + 60, L"技能冷却：" + s);
-
+	//s.Format(L"(%d, %d)\n", model->getMyPoint().x, model->getMyPoint().y);
+	//pDC->TextOutW(point.x, point.y + 90, L"当前位置坐标：" + s);
 }
 
 //void CGameBoardDefault::update(int n, ...) {

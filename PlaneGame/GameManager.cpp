@@ -1,7 +1,47 @@
 #include "stdafx.h"
 #include "GameManager.h" 
+SOCKET ConnectSocket;
 CGameManager::CGameManager(int width , int height) : width(width), height(height)
 {
+	//aSocket = new CSockConnect();
+	WSADATA wsaData;
+	int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+	if (iResult != NO_ERROR) {
+		wprintf(L"WSAStartup failed with error: %ld\n", iResult);
+		//return 1;
+		return;
+	}
+
+	//----------------------
+	// Create a SOCKET for connecting to server
+	ConnectSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	if (ConnectSocket == INVALID_SOCKET) {
+		printf("Error at socket(): %ld\n", WSAGetLastError());
+		WSACleanup();
+		//return 1;
+		return;
+	}
+	//----------------------
+	// The sockaddr_in structure specifies the address family,
+	// IP address, and port for the socket that is being bound.
+	sockaddr_in addrServer;
+	addrServer.sin_family = AF_INET;
+	addrServer.sin_addr.s_addr = inet_addr("127.0.0.1");
+	//addrServer.sin_addr.s_addr = inet_addr("127.0.0.1");
+	addrServer.sin_port = htons(20131);
+
+	//----------------------
+	// Connect to server.
+	iResult = connect(ConnectSocket, (SOCKADDR*)&addrServer, sizeof(addrServer));
+	if (iResult == SOCKET_ERROR) {
+		closesocket(ConnectSocket);
+		printf("Unable to connect to server: %ld\n", WSAGetLastError());
+		WSACleanup();
+		throw "ERROR";
+		//return 1;
+	}
+
+
 	CMyPlane::LoadImages();
 	CMyBomb::LoadImages();
 	CEnemyBomb::LoadImages();
@@ -201,11 +241,49 @@ void CGameManager::draw(CDC * m_pMemDC) {
 	}
 }
 void CGameManager::AI() {
+	CDataModel::Data data = this->getModel()->GetData();
+	//char *s = new char[sizeof(data) + 10];
+	memset(buf, 0, 1025);;
+	memcpy(buf, &data, sizeof(data));
+	//int randnum = rand();
+	//sprintf_s(buf, "%d", randnum);
+	int count = 37;
+	//int count = _read(0, buf, 1024);//从标准输入读入
+	if (count <= 0) {
+		AfxMessageBox(L"长度为0~");
+	}
+	int sendCount, currentPosition = 0;
+	while (count>0 && (sendCount = send(ConnectSocket, buf + currentPosition, count, 0)) != SOCKET_ERROR)
+	{
+		count -= sendCount;
+		currentPosition += sendCount;
+	}
+	if (sendCount == SOCKET_ERROR) {
+		//break;
+		AfxMessageBox(L"连接错误");
+
+	}
+
+
+	count = recv(ConnectSocket, buf, 1024, 0);
+	if (count == 0) {
+		AfxMessageBox(L"被对方关闭");
+		//break;//被对方关闭
+	}
+	if (count == SOCKET_ERROR) {
+		AfxMessageBox(L"错误count<0");
+		//break;//错误count<0
+	}
+	buf[count] = '\0';
+	printf("%s", buf);
+
+	int ran_num = rand();
+
 	cnt++;
-	int t = rand() % 300 + 1;
+	int t = ran_num % 100 + 1;
 	if (cnt%t == 0) {
-		enemyplaneFactory->switchNthObject(rand() % enemyplaneFactory->getCount());
-		CEnemyPlane* ep1 = (CEnemyPlane*)enemyplaneFactory->createObject(rand() % this->width, 0);
+		enemyplaneFactory->switchNthObject(ran_num % enemyplaneFactory->getCount());
+		CEnemyPlane* ep1 = (CEnemyPlane*)enemyplaneFactory->createObject(ran_num % this->width, 0);
 		this->registerObject(L"enPlane",ep1);
 		ep1->attack(5);
 		cnt = 0;
