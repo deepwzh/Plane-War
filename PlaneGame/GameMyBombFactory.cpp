@@ -16,7 +16,10 @@ int CGameMyBombFactory::getCount()
 {
 	return pInfo.bombs.size();
 }
-
+void CGameMyBombFactory::setLevel(CLevel* level, int pindex) {
+	CGameFactory::setLevel(level);
+	pInfo = level->getMyPlaneInfo(pindex);
+}
 
 CGameObject * CGameMyBombFactory::createObject(int x, int y,double offset)
 {
@@ -29,8 +32,9 @@ CGameObject * CGameMyBombFactory::createObject(int x, int y,double offset)
 
 CGameObject * CGameMyBombFactory::createObject(CGameObject * obj)
 {
+	Info::BombInfo info = level->getBombInfo(pInfo.bombs[index]);
 	CBomb * bomb = (CBomb*)obj;
-	bomb->setIndex(index);
+	bomb->setIndex(pInfo.bombs[index]);
 	return bomb;
 }
 

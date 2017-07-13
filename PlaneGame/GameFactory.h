@@ -11,6 +11,7 @@ protected:
 public:
 	virtual int getCount() = 0;
 	CGameFactory(CGameManager* manager, const CLevel* level);
+	void setLevel(CLevel * level);
 	virtual int switchObject();
 	virtual int switchNthObject(int index);
 	virtual ~CGameFactory();

@@ -13,9 +13,7 @@ protected:
 public:
 	CBloodBar(int width, int height, CPoint point, int life);
 	virtual ~CBloodBar();
-	// 通过 CGameObject 继承
-	virtual BOOL draw(CDC * pDC, int hp) = 0;
-
+	virtual BOOL draw(CDC * pDC, int hp);
 	// 通过 CSurroundInterface 继承
 	virtual void updatePosition(CPoint newpoint) override;
 };

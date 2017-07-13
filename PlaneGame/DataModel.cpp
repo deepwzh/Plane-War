@@ -10,7 +10,7 @@ CDataModel::CDataModel()
 	mode = 0;
 	level = 1;
 	arms = 0;
-
+	sleep_time = 0;
 }
 //void CDataModel::SetBoard(CGameBoard * board) {
 //	this->board = board;

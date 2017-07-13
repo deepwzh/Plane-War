@@ -28,7 +28,7 @@ BOOL CEnemyPlane::Collided(POSITION pos, CGameObject* obj)
 	if (obj == NULL) return 0;
 	if (!this->setHP(-obj->get_attack())) {
 		manager->removeObject(L"enPlane", pos);
-		manager->getModel()->setScore(+this->attack_value);
+		manager->getModel()->setScore(+this->attack_value*10);
 		return 1;
 	}
 	return 0;
@@ -42,7 +42,7 @@ BOOL CEnemyPlane::attack(int n = 1)
 		double offset = -0.5 - 0.5 / n;
 		for (int i = 0; i < n; i++) {
 			offset += (1.0 / n);
-			CBomb* bomb1 = new CEnemyBomb(manager, point.x + 20, point.y, 20, offset,5);
+			CBomb* bomb1 = new CEnemyBomb(manager, point.x +50, point.y + 30, 20, offset,5);
 			bomb1->Initial();
 			bomb1->setPath(new CGameEnemyPath());
 			manager->registerObject(L"enBomb", bomb1);

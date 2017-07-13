@@ -1,5 +1,6 @@
 #pragma once
 #include "Bomb.h"
+class GameExplosion;
 class CEnemyBomb :
 	public CBomb
 {

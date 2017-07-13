@@ -5,11 +5,13 @@ CGameConfig::CGameConfig(CString file)
 {
 	std::ifstream config_doc(file, std::ifstream::binary);
 	config_doc >> root;
+	level_max = root["Levels"].size();
 }
 //∂¡»°±≥æ∞≈‰÷√
 Info::BackgroundInfo CGameConfig::GetBackGroundConfig(const int& index ) {
 	Json::Value v = root["Backgrounds"];
 	ASSERT(index <= v.size());
+	v = v[index];
 	Info::BackgroundInfo info;
 	info.speed = v["speed"].asInt();
 	info.BK_ID = v["BK_ID"].asInt();
@@ -98,7 +100,10 @@ Info::LevelInfo CGameConfig::GetLevelConfig(int index)
 	ASSERT(index - 1 <= levels.size());
 	Json::Value &level = levels[index - 1];
 	Info::LevelInfo info;
+	info.level= level["Level"].asInt();
+
 	info.backinfo = GetBackGroundConfig(level["Background"].asInt());
+	info.Score = level["Score"].asInt();
 	Json::Value a = level["MyPlaneID"];
 	for (int i = 0; i < a.size(); i++) {
 		info.myplaneID.push_back(a[i].asInt());

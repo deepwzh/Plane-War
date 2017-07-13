@@ -7,7 +7,6 @@ class CGameEnemyFactory :
 public:
 	CGameEnemyFactory(CGameManager* manager, CLevel* level);
 	virtual ~CGameEnemyFactory();
-
 	virtual int getCount();
 
 	virtual CGameObject * createObject(int x, int y) override;

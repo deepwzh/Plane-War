@@ -2,6 +2,7 @@
 #include "EnemyBomb.h"
 #include "resource.h"
 #include "GameManager.h"
+#include "GameExplosion.h"
 
 CImageList CEnemyBomb::m_Images;
 
@@ -21,6 +22,7 @@ CEnemyBomb::CEnemyBomb(CGameManager* manager, int x, int y, int speed, double of
 
 BOOL CEnemyBomb::Collided(POSITION pos, CGameObject* obj)
 {
+	manager->registerObject(L"explosion", new CGameExplosion(manager, point.x, point.y + 50));
 	manager->removeObject(L"enBomb", pos);
 	return 1;
 }

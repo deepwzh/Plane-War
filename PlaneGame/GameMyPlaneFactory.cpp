@@ -11,8 +11,9 @@ CGameMyPlaneFactory::~CGameMyPlaneFactory()
 
 CGameObject * CGameMyPlaneFactory::createObject(CGameObject * obj)
 {
-	CPlane* plane = (CPlane*)obj;
-	plane->setIndex(index);
+	Info::LevelInfo lInfo = level->getLevelInfo();
+	CPlane* plane = (CMyPlane*)obj;
+	plane->setIndex(lInfo.myplaneID[index]);
 	return plane;
 }
 int CGameMyPlaneFactory::getCount()

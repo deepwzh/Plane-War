@@ -29,6 +29,7 @@ namespace Info{
 	struct LevelInfo {
 		int level;
 		BackgroundInfo backinfo;
+		int Score;
 		std::vector<int> myplaneID;
 		std::vector<int> enemyIDs;
 		std::vector<int> bossID;
@@ -41,6 +42,7 @@ public:
 protected:
 	Json::Value root;
 public:
+	int level_max;
 	CGameConfig(CString file = L"data.json");
 	Info::BackgroundInfo GetBackGroundConfig(const int & index);
 	Info::PathInfo GetPathConfig(const int & index);

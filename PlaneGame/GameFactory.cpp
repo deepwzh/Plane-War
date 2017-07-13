@@ -5,6 +5,9 @@ CGameFactory::CGameFactory(CGameManager* manager, const CLevel* level) : level(l
 {
 	index = 0;
 }
+void CGameFactory::setLevel(CLevel* level) {
+	this->level = level;
+}
 int CGameFactory::switchObject() {
 	this->index++;
 	index %= getCount();

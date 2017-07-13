@@ -10,12 +10,13 @@
 #include "MyPlane.h"
 #include "GameMyPlaneFactory.h"
 #include "GameEnemyFactory.h"
-
+#include "GameExplosion.h"
 #define enPlane 0
 #define enBomb 1
 #define minePlane 2
 #define mineBomb 3
 #define buff 4
+#define explosion 5
 using namespace Info;
 class CGameManager
 {
@@ -43,6 +44,9 @@ protected:
 	int width;
 	int cnt;
 public:
+	bool is_ok() {
+
+	}
 	CLevel* getLevel() { return level; }
 	LevelInfo getLevelInfo() { return info; }
 	CGameManager(int width = 0, int height = 0);
@@ -62,6 +66,10 @@ public:
 		else if (type == "mineBomb") {
 			m_ObjList[mineBomb].AddTail(ob);
 		}
+		else if (type == "explosion") {
+			m_ObjList[explosion].AddTail(ob);
+
+		}
 	}
 	void removeObject(CString type, POSITION ob) {
 		if (type == "enBomb")
@@ -73,6 +81,8 @@ public:
 			m_ObjList[enPlane].RemoveAt(ob);
 		else if (type == "mineBomb")
 			m_ObjList[mineBomb].RemoveAt(ob);
+		else if (type == "explosion")
+			m_ObjList[explosion].RemoveAt(ob);
 	}
 	CObList* getList() {
 		return m_ObjList;

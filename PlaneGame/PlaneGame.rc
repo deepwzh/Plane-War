@@ -94,21 +94,21 @@ IDB_BG1                 BITMAP                  "res\\plane\\stars.bmp"
 
 IDB_MyPlane             BITMAP                  "res\\plane\\me.bmp"
 
-IDB_BG_1             BITMAP                  "res\\image\\background1.bmp"
+IDB_BG_1                BITMAP                  "res\\image\\background1.bmp"
 
-IDB_BG_2             BITMAP                  "res\\image\\background2.bmp"
+IDB_BG_2                BITMAP                  "res\\image\\background2.bmp"
 
-IDB_BG_3            BITMAP                  "res\\image\\background3.bmp"
+IDB_BG_3                BITMAP                  "res\\image\\background3.bmp"
 
-IDB_BG_4            BITMAP                  "res\\image\\background4.bmp"
+IDB_BG_4                BITMAP                  "res\\image\\background4.bmp"
 
-IDB_BG_5            BITMAP                  "res\\image\\background5.bmp"
+IDB_BG_5                BITMAP                  "res\\image\\background5.bmp"
 
-IDB_BG_6            BITMAP                  "res\\image\\background6.bmp"
+IDB_BG_6                BITMAP                  "res\\image\\background6.bmp"
 
-IDB_BG_7            BITMAP                  "res\\image\\background7.bmp"
+IDB_BG_7                BITMAP                  "res\\image\\background7.bmp"
 
-IDB_EnemyBombs            BITMAP                  "res\\image\\balldown.bmp"
+IDB_EnemyBombs          BITMAP                  "res\\image\\balldown.bmp"
 
 IDB_MyBombs             BITMAP                  "res\\image\\ballup.bmp"
 
@@ -118,15 +118,15 @@ IDB_MyBalls             BITMAP                  "res\\image\\bomb.bmp"
 
 IDB_BITMAP19            BITMAP                  "res\\image\\bomb1.bmp"
 
-IDB_Bosses            BITMAP                  "res\\image\\boss.bmp"
+IDB_Bosses              BITMAP                  "res\\image\\boss.bmp"
 
 IDB_Enemys              BITMAP                  "res\\image\\enemyDown.bmp"
 
-IDB_Explosions            BITMAP                  "res\\image\\explosion.BMP"
+IDB_Explosions          BITMAP                  "res\\image\\explosion.BMP"
 
 IDB_MyPlanes            BITMAP                  "res\\image\\me1.bmp"
 
-IDB_Protect            BITMAP                  "res\\image\\protect.bmp"
+IDB_Protect             BITMAP                  "res\\image\\protect.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -226,6 +226,16 @@ BEGIN
     DEFPUSHBUTTON   "确定",IDOK,113,41,50,14,WS_GROUP
 END
 
+IDD_DIALOG1 DIALOGEX 0, 0, 401, 199
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,65,178,50,14
+    PUSHBUTTON      "取消",IDCANCEL,243,178,50,14
+    CONTROL         "",IDC_TAB1,"SysTabControl32",0x0,22,23,335,126
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -281,8 +291,27 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 55
     END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 394
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 192
+    END
 END
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_DIALOG1 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
 
 
 /////////////////////////////////////////////////////////////////////////////

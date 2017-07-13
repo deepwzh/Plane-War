@@ -2,7 +2,7 @@
 #include "MyBomb.h"
 #include "resource.h"
 #include "GameManager.h"
-
+#include "GameExplosion.h"
 CImageList CMyBomb::m_Images;
 
 
@@ -17,7 +17,7 @@ CMyBomb::CMyBomb(CGameManager* manager, int x, int y, int speed, double offset, 
 
 BOOL CMyBomb::Collided(POSITION pos, CGameObject* obj)
 {
-
+	manager->registerObject(L"explosion", new CGameExplosion(manager, point.x, point.y));
 	manager->removeObject(L"mineBomb", pos);
 	return 1;
 }

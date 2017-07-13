@@ -157,6 +157,12 @@
     <ClInclude Include="CharsetConvert.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GameExplosion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConfigPanel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlaneGame.cpp">
@@ -258,6 +264,12 @@
     <ClCompile Include="CharsetConvert.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GameExplosion.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameConfigPanel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PlaneGame.rc">
@@ -301,6 +313,57 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\plane\stars.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\background1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\background2.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\background3.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\background4.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\background5.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\background6.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\background7.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\balldown.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\ballup.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\blood.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\bomb.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\bomb1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\boss.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\enemyDown.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\explosion.BMP">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\me1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\image\protect.bmp">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

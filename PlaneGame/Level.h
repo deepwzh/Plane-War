@@ -16,8 +16,11 @@ protected:
 	std::map<CString, int> score_list; //µÃ·Ö
 	std::map<CString, int> damage_list; //ÉËº¦
 public:
-	int getMyPlaneID()const {
-		return levelInfo.myplaneID[0];
+	int getMaxLevel() const {
+		return config->level_max;
+	}
+	int isLevelUp(int score)const {
+		return levelInfo.level < getMaxLevel() &&  score >= config->GetLevelConfig(levelInfo.level).Score;
 	}
 	Info::LevelInfo getLevelInfo()const {
 		return levelInfo;

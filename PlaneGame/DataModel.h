@@ -8,6 +8,7 @@ protected:
 	int mode;
 	int level;
 	int arms;
+	int sleep_time;
 public:
 	int getScore() { return score; }
 	void setScore(int score) { this->score +=  score; }
@@ -21,6 +22,8 @@ public:
 	void setArms(int arms) { this->arms = arms; }
 	int getLevel() { return level; }
 	void setLevel(int level) { this->level = level; }
+	int getSleepTime() { return sleep_time; }
+	void setSleepTime(int sleep_time) { this->sleep_time = sleep_time; }
 	//virtual void push() {
 	//	board->update(2, getHP(), getScore());
 	//}

@@ -2,16 +2,21 @@
 #include "GameManager.h" 
 CGameManager::CGameManager(int width , int height) : width(width), height(height)
 {
+	CMyPlane::LoadImages();
+	CMyBomb::LoadImages();
+	CEnemyBomb::LoadImages();
+	CEnemyPlane::LoadImages();
+	CGameExplosion::LoadImages();
 	myPlane = NULL;
 	NN = 0;
 	cnt = 0;
-	level = new CLevel(1);
+	level = NULL;
 	myplaneFactory = new CGameMyPlaneFactory(this, level);
 	enemyplaneFactory = new CGameEnemyFactory(this, level);
 	InitLevel(1);
 	model = new CDataModel();
 	board = new CGameBoardDefault(model,CPoint(100,10),width,height);
-	m_ObjList = new CObList[5];
+	m_ObjList = new CObList[6];
 }
 
 void CGameManager::InitConnect() {
@@ -20,29 +25,35 @@ void CGameManager::InitConnect() {
 
 //初始化关卡
 void CGameManager::InitLevel(int index) {
-	CMyPlane::LoadImages();
-	CMyBomb::LoadImages();
-	CEnemyBomb::LoadImages();
-	CEnemyPlane::LoadImages();
-	if(myPlane)
-		delete myPlane;
+	if(level)
+		delete level;
+	//CPoint oinfo = level->getLevelInfo();
+	level = new CLevel(index);
 	info = level->getLevelInfo();
-	int my_speed = level->getMyPlaneInfo(info.myplaneID[0]).speed;
-
-	myPlane = (CMyPlane*)myplaneFactory->createObject(width / 2, height / 2);
-	//启动游戏
+	//int my_speed = level->getMyPlaneInfo(info.myplaneID[0]).speed;
+	myplaneFactory->setLevel(level);
+	enemyplaneFactory->setLevel(level);
+	if(info.level == 1)
+		myPlane = (CMyPlane*)myplaneFactory->createObject(width / 2, height / 2);
+	else{
+		myPlane = (CMyPlane*)myplaneFactory->createObject(myPlane);
+	}
+		//启动游戏
 }
 
 //实现升级
 void CGameManager::LevelUp() {
 	int tmp = getLevelInfo().level;
-	level = new CLevel(tmp + 1);
 	InitLevel(tmp + 1);
+	model->setLevel(tmp + 1);
 }
 
 
 //绘制游戏
 void CGameManager::draw(CDC * m_pMemDC) {
+	if (level->isLevelUp(model->getScore())) {
+		LevelUp();
+	}
 	//TRACE("%d %d\n", game_manager->getWidth(), game_manager->getHeight());
 	//m_pMemDC->FillSolidRect(0, 0, getWidth(), getHeight(), RGB(84, 142, 239));
 	CDC memdc;
@@ -76,9 +87,17 @@ void CGameManager::draw(CDC * m_pMemDC) {
 		return;
 	}
 
-	//绘制子弹/炸弹
-	POSITION mPos = NULL, _mPos = NULL;
 	CObList* list = getList();
+	POSITION mPos = NULL, _mPos = NULL;
+	for (mPos = list[explosion].GetHeadPosition(); (_mPos = mPos) != NULL; ) {
+		CGameExplosion * ex = (CGameExplosion*)list[explosion].GetNext(mPos);
+		if (!ex->draw(m_pMemDC)) {
+			delete ex;
+			list[explosion].RemoveAt(_mPos);
+		}
+	}
+	mPos = NULL;
+	_mPos = NULL;
 
 	for (mPos = list[enBomb].GetHeadPosition(); (_mPos = mPos) != NULL; ) {
 		if (!myPlane) {
@@ -219,11 +238,14 @@ void CGameManager::HandleKeyMap()
 	}
 	if (GetKeyState('R') & 0x8000?1:0) {
 		//int attack = level->getMyPlaneInfo(getLevelInfo().myplaneID[0]).attack;
-		myplaneFactory->switchObject();
-		myPlane = (CMyPlane*)myplaneFactory->createObject(myPlane);
+		if (myPlane->is_sleep()) {
+			myplaneFactory->switchObject();
+			myPlane = (CMyPlane*)myplaneFactory->createObject(myPlane);
+		}
 	}
 	if (GetKeyState('Z') & 0x8000) {
-		myPlane->switch_bomb();
+		if(myPlane->is_sleep())
+			myPlane->switch_bomb();
 	}
 }
 // 判断是否在屏幕区域内

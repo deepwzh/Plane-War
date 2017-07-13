@@ -8,6 +8,8 @@ class CGameMyBombFactory :
 protected:
 	PlaneInfo pInfo;
 public:
+
+	void setLevel(CLevel* level, int pindex);
 	CGameMyBombFactory(CGameManager* manager, CLevel* level, int pindex);
 	virtual ~CGameMyBombFactory();
 	virtual int getCount();

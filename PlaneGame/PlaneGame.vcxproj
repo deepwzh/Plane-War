@@ -197,6 +197,8 @@
     <ClInclude Include="EnemyPlane.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="GameBoardDefault.h" />
+    <ClInclude Include="GameConfigPanel.h" />
+    <ClInclude Include="GameExplosion.h" />
     <ClInclude Include="GameMyBombFactory.h" />
     <ClInclude Include="GameConfig.h" />
     <ClInclude Include="GameEnemyFactory.h" />
@@ -245,6 +247,8 @@
     <ClCompile Include="EnemyPlane.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GameBoardDefault.cpp" />
+    <ClCompile Include="GameConfigPanel.cpp" />
+    <ClCompile Include="GameExplosion.cpp" />
     <ClCompile Include="GameMyBombFactory.cpp" />
     <ClCompile Include="GameConfig.cpp" />
     <ClCompile Include="GameEnemyFactory.cpp" />
@@ -285,6 +289,23 @@
     <None Include="res\PlaneGame.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\image\background1.bmp" />
+    <Image Include="res\image\background2.bmp" />
+    <Image Include="res\image\background3.bmp" />
+    <Image Include="res\image\background4.bmp" />
+    <Image Include="res\image\background5.bmp" />
+    <Image Include="res\image\background6.bmp" />
+    <Image Include="res\image\background7.bmp" />
+    <Image Include="res\image\balldown.bmp" />
+    <Image Include="res\image\ballup.bmp" />
+    <Image Include="res\image\blood.bmp" />
+    <Image Include="res\image\bomb.bmp" />
+    <Image Include="res\image\bomb1.bmp" />
+    <Image Include="res\image\boss.bmp" />
+    <Image Include="res\image\enemyDown.bmp" />
+    <Image Include="res\image\explosion.BMP" />
+    <Image Include="res\image\me1.bmp" />
+    <Image Include="res\image\protect.bmp" />
     <Image Include="res\PlaneGame.ico" />
     <Image Include="res\PlaneGameDoc.ico" />
     <Image Include="res\plane\ball.BMP" />

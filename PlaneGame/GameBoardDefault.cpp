@@ -18,6 +18,10 @@ void CGameBoardDefault::draw(CDC * pDC)
 	CString s;
 	s.Format(L"%d", model->getScore());
 	pDC->TextOutW(point.x, point.y, L"分数：" + s);
+	s.Format(L"%d", model->getLevel());
+	pDC->TextOutW(point.x , point.y + 30, L"等级：" + s);
+	s.Format(L"%d", model->getSleepTime());
+	pDC->TextOutW(point.x, point.y + 60, L"技能冷却：" + s);
 
 }
 

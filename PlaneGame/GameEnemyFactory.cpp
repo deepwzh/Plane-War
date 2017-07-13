@@ -26,7 +26,8 @@ CGameObject * CGameEnemyFactory::createObject(int x, int y)
 
 CGameObject * CGameEnemyFactory::createObject(CGameObject * obj)
 {
+	LevelInfo lInfo = level->getLevelInfo();
 	CEnemyPlane * plane = (CEnemyPlane*)obj;
-	plane->setIndex(index);
+	plane->setIndex(lInfo.enemyIDs[index]);
 	return plane;
 }

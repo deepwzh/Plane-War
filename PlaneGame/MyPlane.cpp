@@ -3,6 +3,7 @@
 #include "GameManager.h"
 CMyPlane::CMyPlane(CGameManager* manager, int x, int y, int speed, int blood, int attack_value) : CPlane(manager, attack_value, x, y, speed, blood) {
 	this->attack_value = attack_value;
+	sleep_time = 0;
 }
 CImageList CMyPlane::m_Images;
 BOOL CMyPlane::Collided(POSITION pos, CGameObject* obj)
@@ -14,6 +15,11 @@ BOOL CMyPlane::Collided(POSITION pos, CGameObject* obj)
 }
 BOOL CMyPlane::draw(CDC* pDC)
 {
+	if (sleep_time > 0) {
+		sleep_time--;
+	}
+	manager->getModel()->setSleepTime(sleep_time);
+
 	//TRACE("%d %d\n", width, height);
 	m_Images.Draw(pDC, index, point, ILD_TRANSPARENT);
 	//blood
@@ -24,14 +30,14 @@ BOOL CMyPlane::draw(CDC* pDC)
 // ·¢¶¯¹¥»÷
 BOOL CMyPlane::attack(int n = 1)
 {
+	fact->setLevel(manager->getLevel(),index);
 	cnt++;
 	if (cnt % 4 == 0) {
 		cnt = 0;
 		double offset = -0.5 - 0.5 / n;
 		for (int i = 0; i < n; i++) {
 			offset += (1.0 / n);
-			
-			CBomb* bomb1 = (CMyBomb*)fact->createObject(int(point.x + 20 + offset * 50), point.y, offset );
+			CBomb* bomb1 = (CMyBomb*)fact->createObject(int(point.x + 40 + offset * 50), point.y, offset );
 			bomb1->setPath(new CGamePathArc());
 			manager->registerObject(L"mineBomb", bomb1);
 			//CBomb* bomb2 = (CMyBomb*)fact->createObject(bomb->getRect().left + 20 + offset * 50, bomb->getRect().top, offset);
